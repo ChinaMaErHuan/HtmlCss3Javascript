@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>音乐平台</title>
+   <style type="text/css">
+	 *{margin:0;padding:0;}
+	  body{font-size:12px;font-family:"微软雅黑";color:#666;background:#4c5666;}
+	  img{border:0;}
+	  ul li {list-style:none;}
+	  a{text-decoration:none;}
+	  #music{width:610px;height:500px;margin:100px auto;overflow:hidden;}
+	  /*m_lrc start*/
+	  #music .m_lrc{width:300px;height:470px;float:left;background:#787878;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius:5px;-ms-border-radius:5px;-o-border-radius:5px;position:relative;z-index:2;}
+	  /*l_title start*/
+	  #music .m_lrc .l_title{width:100%;height:65px;border-radius: 5px 5px 0px 0px;-webkit-border-radius: 5px 5px 0px 0px;-moz-border-radius: 5px 5px 0px 0px;-ms-border-radius: 5px 5px 0px 0px;-o-border-radius: 5px 5px 0px 0px;border-bottom:1px solid #ced1d3;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f3f3), color-stop(1, #dddfe1));filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#f2f3f3,endColorstr=#dddfe1,grandientType=0);}
+	  #music .m_lrc .l_title .t_dir a{width:24px;height:18px;display:block;background:url("images/sm_icon.png") no-repeat -243px -127px;float:left;margin: 26px 12px 0 15px;}
+	  #music .m_lrc .l_title .t_dir a:hover{background-position:-243px -151px;}
+	  #music .m_lrc .l_title h2{float:left;width:200px;line-height:65px;font-size:18px;font-weight:normal;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#000;}
+	  #music .m_lrc .l_title .t_share a{width:18px;height:18px;display:block;background:url("images/sm_icon.png") no-repeat -269px -127px;float:right;margin:27px 17px 0 0;}
+	  #music .m_lrc .l_title .t_share a:hover{background-position:-28px -149px;}
+	  /*end l_title*/
+	  /*l_con start*/
+	  #music .l_con{width:300px;height:329px;overflow:auto;background:url("images/bg.jpg") top center ;background-size:cover;position:relative;}
+	  #music .l_con .l_con_lrc{width:300px;height:329px;overflow:auto;position:absolute;top:0;left:0;z-index:2;}
+	  #music .l_con .l_img{position:absolute;left:0;top:15px;z-index:1;}
+	  .lrcLine{font-size:14px;color:#fff;padding-left:15px;line-height:30px;}
+	  /*end l_con */
+
+	  /*l_tools start*/
+	  #music .m_lrc .l_tools{width:100%;height:104px;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f2f3f3), color-stop(1, #dddfe1));border-radius: 0 0 5px 5px;-webkit-border-radius: 0 0 5px 5px;-moz-border-radius: 0 0 5px 5px;-ms-border-radius: 0 0 5px 5px;-o-border-radius: 0 0 5px 5px;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#f2f3f3,endColorstr=#dddfe1,grandientType=0);}
+	  #music .m_lrc .l_tools .t_play{width:100%;height:40px;padding:5px 0;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_com{display:block;background:url("images/sm_icon.png")no-repeat;float:left;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_1{width:23px;height:19px;background-position:-291px -127px;margin:12px 0 0 7px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_1:hover{background-position:-291px -151px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_1.sel/*互斥样式*/{background-position:-291px -151px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_2{width:28px;height:18px;background-position:-317px -127px;margin:12px 0 0 55px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_2:hover{background-position:-317px -152px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_3{width:20px;height:25px;background-position:-347px -125px;margin:8px 0 0 20px;display:none;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_3:hover{background-position:-347px -151px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_4{width:23px;height:25px;background-position:-367px -125px;margin:8px 0 0 17px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_4:hover{background-position:-367px -151px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_5{width:28px;height:18px;background-position:-392px -127px;margin:12px 0 0 20px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_5:hover{background-position:-392px -151px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_6{width:24px;height:22px;background-position:-421px -126px;margin: 9px 0 0 68px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_6:hover{background-position:-421px -151px;}
+	  #music .m_lrc .l_tools .t_play .p_btn .b_6.sel/*互斥样式*/{background-position:-421px -151px;}
+	  #music .m_lrc .l_tools .t_time{width:100%;height:14px;padding:16px 0;}
+	  #music .m_lrc .l_tools .t_time .t_start{float:left;padding-left:12px;width:35px;}
+	  #music .m_lrc .l_tools .t_time .t_end{float:right;padding-left:12px;width:35px;}
+	  #music .m_lrc .l_tools .t_time .t_bar{width:206px;height:8px;background:#a2a7aa;float:left;border-radius:6px;-webkit-border-radius:6px;-moz-border-radius:6px;-ms-border-radius:6px;-o-border-radius:6px;margin-top:5px;position:relative;}
+	  #music .m_lrc .l_tools .t_time .t_bar .bar_1{width:0;height:8px;background:#f0676a;border-radius:6px 0 0 6px;-webkit-border-radius:6px 0 0 6px;-moz-border-radius:6px 0 0 6px;-ms-border-radius:6px 0 0 6px;-o-border-radius:6px 0 0 6px;}
+	  #music .m_lrc .l_tools .t_time .t_bar .bar_2{width:12px;height:12px;background:#fff;border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;-ms-border-radius:50%;-o-border-radius:50%;position:absolute;top:-2px;left:0;z-index:2;cursor:pointer;}
+	  #music .m_lrc .l_tools .t_time .t_bar .bar_3{width:100%;height:100%;position:absolute;top:0;left:0;z-index:1;}
+	  /*end m_lrc*/
+
+	  /*m_list start*/
+	  #music .m_list{width:300px;height:470px;float:right;border-radius:5px;background:#212732;
+	  position:relative;z-index:1;}
+	  #music .m_list .l_name{width:100%;height:48px;background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #f87d7a), color-stop(1, #ef6a6c));filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#f87d7a,endColorstr=#ef6a6c,grandientType=0);border-radius:5px 5px 0 0;}
+	  #music .m_list .l_name .n_none a{width:16px;height:12px;display:block;background:url("images/sm_icon.png") no-repeat -448px -130px;float:left;margin:20px 0 0 10px;}
+	  #music .m_list .l_name .n_none a:hover{background-position:-448px -152px;}
+	  #music .m_list .l_name h2{width:237px;line-height:48px;font-size:16px;text-align:center;font-weight:normal;color:#fff;float:left;}
+	  #music .m_list .l_name .n_down a{width:23px;height:16px;display:block;background:url("images/sm_icon.png") no-repeat -468px -128px;float:left;margin-top:18px;}
+	  #music .m_list .l_name .n_down a:hover{background-position:-468px -152px;}
+	  #music .m_list .l_m_con ul li{width:100%;height:40px;border-bottom:1px solid #1b1f25;background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #262c35), color-stop(1, #212732));filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#262c35,endColorstr=#212732,grandientType=0);line-height:40px;}
+	  #music .m_list .l_m_con ul .m_sel{border-bottom:1px solid #ec5b62;}
+	  #music .m_list .l_m_con ul .m_sel i{background-position:-13px -150px;}
+	  #music .m_list .l_m_con ul .m_sel a{color:#fff;}
+	  #music .m_list .l_m_con ul li i{width:12px;height:16px;display:block;float:left;background:url("images/sm_icon.png") no-repeat 0 -150px;margin:12px;}
+	  #music .m_list .l_m_con ul li a{width:224px;color:#7e868e;font-size:14px;display:block;float:left;}
+	  #music .m_list .l_m_con ul li a:hover{color:#fff;}
+	  #music .m_list .l_m_con ul li:hover{background:#2d2d2d;}
+	  #music .m_list .l_m_con ul li span{color:#7e868e;}
+	  /*滚动条解决方案*/
+	  ::-webkit-scrollbar{width:10px;height:6px;background:#ccc;}
+	  ::-webkit-scrollbar-button{background-color:#e5e5e5;}
+	  ::-webkit-scrollbar-track{background:#999;}
+	  ::-webkit-scrollbar-track-piece{background:#ccc}
+	  ::-webkit-scrollbar-thumb{background:#666;}
+	  ::-webkit-scrollbar-corner{background:#82AFFF;}
+	  ::-webkit-scrollbar-resizer{background:#FF0BEE;}
+	  scrollbar{-moz-appearance:none !important;background:rgb(0,255,0) !important;}
+	  scrollbarbutton{-moz-appearance:none !important;background-color:rgb(0,0,255) !important;}
+	  scrollbarbutton:hover{-moz-appearance:none !important;background-color:rgb(255,0,0) !important;}
+	  .lrcsel{font-size:20px;color:#6c0;}
+	  /*动画关键帧 , 定义播放旋转动画*/
+			@keyframes rotate{
+				0%{
+					transform: rotate(0deg);
+					-webkit-transform: rotate(0deg);
+					-ms-transform: rotate(0deg);
+					-moz-transform: rotate(0deg);
+					-o-transform: rotate(0deg);										
+				}
+				100%{
+					transform: rotate(360deg);
+					-webkit-transform: rotate(360deg);
+					-ms-transform: rotate(360deg);
+					-moz-transform: rotate(360deg);
+					-o-transform: rotate(360deg);
+				}
+			} 
+			
+			.arry{
+				animation: rotate 10s linear infinite;
+				-webkit-animation: rotate 10s linear infinite;
+				-moz-animation: rotate 10s linear infinite;
+				-ms-animation: rotate 10s linear infinite;
+				-o-animation: rotate 10s linear infinite;				
+			}
+	  
+	  /*end m_list*/
+	  /*end music*/
+	</style>
+ </head>
+ <body>
+		<!--music start-->
+		<div id="music">
+			<!--m_lrc start-->
+			<div class="m_lrc">
+				<!--l_title start-->
+				<div class="l_title">
+					<div class="t_dir">
+						<a href="javascript:void(0)" class="expandon" title="歌曲列表/SongList"></a>
+					</div>
+					<h2 id="l_name_new">马二欢的音乐平台</h2>
+					<div class="t_share">
+						<a href="javascript:void(0)" title="分享/Share"></a>
+					</div>
+				</div>
+				<!--end l_title-->
+
+				<div class="l_con">
+					<div class="l_con_lrc"></div>
+					<div class="l_img">
+						<img src="images/m.png" alt="音乐旋转图" width="300" height="300" class="arry"/>
+					</div>
+				</div>
+				<!--l_tools start-->
+				<div class="l_tools">
+					<div class="t_play">
+						<div class="p_btn">
+							<a href="javascript:void(0)" class="b_com b_1 mark " data-mark="1" title="顺序循环"></a>
+						</div>
+						<div class="p_btn">
+							<a href="javascript:void(0)" class="b_com b_2 prev" title="上一首"></a>
+						</div>
+						<div class="p_btn">
+							<a href="javascript:void(0)" class="b_com b_4" id="play" title="播放"></a>
+							<a href="javascript:void(0)" class="b_com b_3" id="stop" title="暂停"></a>
+						</div>
+						<div class="p_btn">
+							<a href="javascript:void(0)" class="b_com b_5 next" title="下一首"></a>
+						</div>
+						<div class="p_btn">
+							<a href="javascript:void(0)" class="b_com b_6 mark" data-mark="2" title="随机播放"></a>
+						</div>
+					</div>
+					<div class="t_time">
+						<div class="t_start">0:00</div>
+						<div class="t_bar">
+							<div class="bar_1"></div>
+							<div class="bar_2"></div>
+							<div class="bar_3"></div>
+						</div>
+						<div class="t_end">0:00</div>
+					</div>
+				</div>
+				<!--end l_tools-->
+			</div>
+			<!--end m_lrc-->
+
+			<!--m_list start-->
+			<div class="m_list">
+				<div class="l_name">
+					<div class="n_none">
+						<a href="javascript:void(0)" class="expand" title="收回菜单/Toggle"></a>
+					</div>
+					<h2>TanZhouMusic</h2>
+					<div class="n_down">
+						<a href="javascript:void(0)" title="云端下载/Upload"></a>
+					</div>
+				</div>
+
+				<div class="l_m_con">
+					<ul id="m_box">
+						<li class="m_items" data-src="mp3/1.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">撕夜--阿杜</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/2.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">车站--李建</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/3.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">蓝莲花--贝贝</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/4.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">李白--李荣浩</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/5.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">你走你的路--汪峰</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/6.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">野子--晨悠组合</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/7.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">晴天--关诗敏</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/8.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">鱼--黄霄云</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/9.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">小芳--李荣浩</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/10.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">有个爱你的人不容易--那英</a>
+							<span>分享</span>
+						</li>
+						<li class="m_items" data-src="mp3/11.mp3">
+							<i class="m_box_i"></i>
+							<a href="javascript:void(0)" class="sings">相见恨晚--彭佳慧</a>
+							<span>分享</span>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+			<!--end m_list-->
+		</div>
+		<!--end music-->
+
+		<textarea id="lrc" style = "display:none";>
+			[ti:撕夜]
+			[ar:撕夜 阿杜]
+			[al:Do The Best]
+			[by:]
+			[offset:0]
+			[00:00.95]撕夜 - 阿杜
+			[00:01.86]词：王武雄
+			[00:02.71]曲：蔡政勋
+			[00:03.58]编曲：许环良
+			[00:04.81]
+			[00:16.19]我把梦撕了一页
+			[00:18.15]
+			[00:18.85]不懂明天该怎么写
+			[00:21.42]
+			[00:22.64]冷冷的街冷冷的灯照着谁
+			[00:27.13]
+			[00:31.21]一场雨湿了一夜
+			[00:33.35]
+			[00:33.93]你的温柔该怎么给
+			[00:36.59]
+			[00:37.78]冷冷的风冷冷的吹不停歇
+			[00:42.40]
+			[00:45.03]哪个人在天桥下
+			[00:47.43]留下等待工作的电话号码
+			[00:51.82]
+			[00:53.46]我想问他多少人打给他
+			[00:57.82]
+			[01:00.17]随手翻开电话上
+			[01:02.18]
+			[01:02.69]那本指引迷途心灵的密码
+			[01:07.04]
+			[01:08.60]我的未来依然没有解答
+			[01:13.64]
+			[01:17.05]旧电话撕了一页
+			[01:19.18]
+			[01:19.84]我的朋友还剩下谁
+			[01:22.32]
+			[01:23.53]冷冷的心冷冷的梦在哽咽
+			[01:28.16]
+			[01:32.27]两个人试了一夜
+			[01:34.88]抱得再紧也不能睡
+			[01:37.57]
+			[01:38.87]冷冷的你冷冷的泪湿了夜
+			[01:43.18]
+			[02:02.63]我把梦撕了一页
+			[02:04.86]
+			[02:05.38]不懂明天该怎么写
+			[02:08.03]
+			[02:09.36]冷冷的街冷冷的灯照着谁
+			[02:13.94]
+			[02:17.87]一场雨湿了一夜
+			[02:19.97]
+			[02:20.59]你的温柔该怎么给
+			[02:23.24]
+			[02:24.49]冷冷的风冷冷的吹不停歇
+			[02:28.98]
+			[02:31.72]哪个人在天桥下
+			[02:34.02]留下等待工作的电话号码
+			[02:38.49]
+			[02:39.76]我想问他多少人打给他
+			[02:44.30]
+			[02:46.96]随手翻开电话上
+			[02:49.27]那本指引迷途心灵的密码
+			[02:53.75]
+			[02:55.26]我的未来依然没有解答
+			[02:59.85]
+			[03:02.00]哪个人在天桥下
+			[03:03.91]
+			[03:04.49]留下等待工作的电话号码
+			[03:08.84]
+			[03:10.16]我想问他多少人打给他
+			[03:14.97]
+			[03:17.40]随手翻开电话上
+			[03:19.09]
+			[03:19.69]那本指引迷途心灵的密码
+			[03:24.16]
+			[03:25.73]我的未来依然没有解答
+			[03:30.81]
+			[03:34.11]旧电话撕了一页
+			[03:36.11]
+			[03:36.83]我的朋友还剩下谁
+			[03:39.31]
+			[03:40.57]冷冷的心冷冷的梦在哽咽
+			[03:45.19]
+			[03:49.30]两个人试了一夜
+			[03:51.28]
+			[03:52.03]抱得再紧也不能睡
+			[03:54.50]
+			[03:55.83]冷冷的你冷冷的泪湿了夜
+			[04:00.35]
+			[04:03.56]冷冷的你冷冷的泪湿了夜
+		</textarea>
+		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript">
+		
+		//创建播放器
+		var audioDom = document.createElement("audio");
+		//索引记录
+		var playIndex = 0;
+		//列表长度
+		var len = $("#m_box").children().length;
+		//定义mark顺序播1，随机2；
+		var mark = 1;
+		//监听时间
+		function timeEvent(){
+			//音频加载完毕监听
+			audioDom.oncanplaythrough = function(){
+				//获取时间长
+				var time = this.duration;
+				//获取播放时长
+				var stime = this.currentTime;
+				//格式化时间
+				var ftime = formartTime(time);
+				$(".t_end").text(ftime);
+			
+			}
+			//播放事件监听
+			audioDom.ontimeupdate = function(){
+				// 获取总时长
+				var time = this.duration;
+				// 获取播放时长
+				var stime = this.currentTime;
+				// 格式化时间
+				var ftime = formartTime(stime);
+				$(".t_start").text(ftime);
+					//获取播放进度
+					var pbit = stime / time;
+					//计算百分比
+					var percent = pbit*100;
+					$(".bar_1").width(percent+"%");
+					$(".bar_2").css("left",(percent)+"%");
+				}
+			// 音乐播放结束
+			audioDom.onended = function(){
+					if(mark == 1){
+						nextMusic();
+					} else{
+						randomMusic();
+					}
+				}
+			}
+		//格式化时间
+		function formartTime(time){
+				var m = Math.floor(time / 60);
+				var s = Math.floor(time % 60);
+				return (m<10 ? "0" + m:m) + ":" + (s<10 ? "0" + s:s);
+			}
+		//添加音乐
+		function addMusic(src){
+			audioDom.src = src;
+			
+		}
+		//播放音乐
+		function playMusic(obj){
+			audioDom.play();
+			repeatName(obj);	
+		}
+		// 动态替换歌名
+		function repeatName(obj){
+			var name = obj.find("a").text();
+			$("#l_name_new").text(name);	
+		}
+		//下一首
+		function nextMusic(){
+			playIndex = (playIndex==(len-1)?0:++playIndex)
+			//取到音乐
+			var sel = $("#m_box").find(".m_items").eq(playIndex);
+			var src = sel.data("src");
+			addMusic(src);
+			//播放
+			playMusic(sel);
+			sel.addClass("m_sel").siblings().removeClass("m_sel");	
+		}
+		//上一首
+		function prevMusic(){
+			playIndex = (playIndex<0?len-1:--playIndex);
+			//取到音乐
+			var sel = $("#m_box").find(".m_items").eq(playIndex);
+			var src = sel.data("src");
+			addMusic(src);
+			//播放
+			playMusic(sel);
+			sel.addClass("m_sel").siblings().removeClass("m_sel");	
+		}
+
+		// 随机播放音乐
+		function randomMusic(){
+			var random = Math.floor(Math.random()*len);
+			playIndex = random;
+			var sel = $("#m_box").find(".m_items").eq(playIndex);
+			var src = sel.data("src");
+			// 添加音乐
+			addMusic(src);
+			// 播放选中的音乐
+			playMusic(sel);
+			sel.addClass("m_sel").siblings().removeClass("m_sel");		
+		}
+		//页面加载就执行
+		$(function(){
+			// 初始化监听事件
+			timeEvent();
+			//点击播放
+			$("#play").click(function(){
+				//如果有选中的文件就直接播放
+				var sel = $("#m_box").find(".m_sel");
+				//取到歌曲的路径
+				var src= sel.data("src");
+				if(!src){
+					// 如果没有把第一当做播放的元素时
+					sel = $("#m_box").find(".m_items").eq(0);
+					src = sel.data("src");
+					//添加到播放器中
+					addMusic(src);
+					//为默认的歌曲添加样式
+					sel.addClass("m_sel");
+				}
+				playMusic(sel);
+				//切换暂停按钮
+				$("#play").hide().next().show();
+				// 将索引记录下来
+				playIndex = sel.index();
+			});
+			//点击暂停
+			$("#stop").click(function(){
+				audioDom.pause();
+				//切换按钮
+				$("#stop").hide().prev().show();
+			});
+			//点击列表播放
+			$("#m_box").find(".m_items").click(function(){
+				//获取当前音乐地址
+				var src = $(this).data("src");
+				addMusic(src);
+				playMusic($(this));
+				$(this).addClass("m_sel").siblings().removeClass("m_sel");
+				// 自动触发播放按钮
+				$("#play").trigger("click");
+				//记录索引
+				playIndex = $(this).index();
+			
+			});
+			// 点击下一首
+			$(".next").click(function(){
+				if (mark==1){nextMusic();}
+				if (mark==2){randomMusic();}		
+			});
+			// 点击上一首
+			$(".prev").click(function(){
+				if (mark==1){prevMusic();}
+				if (mark==2){randomMusic();}
+			});
+			//随机和顺序播放样式的改变 上面的sel样式中 用到了互斥样式 一般在写样式的时候，重点会用空格隔开，这个样式的改变没有用到，就是互斥的，见上面代码
+			$(".mark").click(function(){
+				mark = $(this).data("mark");
+				$(".mark").removeClass("sel");
+				$(this).addClass("sel");	
+			});
+			//收起歌单
+			$(".expand").click(function(){
+				$(".m_list").animate({left:-310},function(){
+					$("#music").animate({width:300});
+				});
+			});
+			//展开歌单
+			$(".expandon").click(function(){
+				$("#music").width(610);
+				$(".m_list").animate({left:0},1000);
+			});
+			//拖动播放
+			$(".bar_2").mousedown(function(e){
+				//获取拖动对象
+				var _this = $(this);
+				//获取鼠标的位置
+				var x = e.clientX || e.pageX;
+				//获取鼠标的起点位置
+				var left = _this.position().left;
+				//获取可拖动的最大位置
+				var maxLeft = _this.parent().width()-10;
+				//暂停音乐
+				audioDom.pause();
+				//拖动开始
+				$(document).mousemove(function(e){
+					//获取鼠标的最终位置
+					var n1 =  (e.clientX || e.pageX) - x + left;
+					//加锁 判断不超bar_1的边界
+					if(n1<0){n1 = 0;}
+					if(n1>maxLeft){n1 = maxLeft;}
+					//定位拖动元素的终点位置
+					_this.css("left",n1);
+					//根据拖动的位置除以最大位置获得百分比
+					var percent = (n1/maxLeft)*100;
+					//给进度条和拖动元素赋值
+					$(".bar_1").width(percent+"%");
+					$(".bar_2").css("left",(percent-2)+"%");
+					//加载到音乐
+					audioDom.currentTime = audioDom.duration*(n1/ maxLeft);
+				
+				}).mouseup(function(){
+						//松开鼠标，播放音乐
+						audioDom.play();
+						//移除事件
+						$(document).unbind("mousemove");
+						$(document).unbind("mouseup");
+					});
+			});
+			//点击进度条播放
+			$(".bar_3").mousedown(function(e){
+				//获取点击位置
+				var _this = $(this);
+				//获取鼠标位置
+				var x = e.clinentX || e.pageX;
+				//获取起点位置
+				var left = _this.parent().offset().left;
+				//获取最大位置
+				var maxWidth = _this.parent().width();
+				//获取位置 就是点击到一个地方以后，距离原来进度的位置(距离),思路就是计算出这段距离，换算成百分比，然后改变样式就可以！
+				var w = x-left;
+				//根据点击位置除以最大位置得到百分比
+				var percent = (w/maxWidth)*100;
+				//根据进度条赋值
+				$(".bar_1").width(percent+"%");
+				$(".bar_2").css("left",(percent-2)+"%");
+				// 音乐文件的时间加载
+				audioDom.currentTime = audioDom.duration * (w/maxWidth);
+			});
+		});
+
+		//歌词部分
+		//加载歌词
+		function loadLrc(name){
+			
+		}
+		//页面加载就执行
+		$(function(){
+			//得到文本域的值
+			var text = $("#lrc").val();
+			//把时间和歌词分离出来 split把字符串分割成字符串数组 见：Javascript的split方法
+			//参数就是要分割字符串的关键字 省略的参数就是值就是保存到数组里面的字符个数
+			var lrcArr = text.split("[");
+			//console.log(lrcArr);
+			var htmlLrc = "";
+			for(var i=0;i<lrcArr.length;i++){
+				//第二次分割 ]
+				var arr = lrcArr[i].split("]");
+				//alert(arr);
+				//取到歌词
+				var message = arr[1];//为什么下标是1？因为arr[0]是:歌词的时间 arr[1]是歌词
+				//console.log(arr);
+				//取到时间
+				var timer = arr[0].split(".");
+				//console.log(timer);
+				//timer就是把时间取到形式如下:["00:02", "71"] timer[0]是分钟和秒 timer[1]毫秒
+				//取到分钟和秒
+				var stime = timer[0].split(":");
+				//stime[0]是分钟数，stime[1]是秒钟
+				//console.log(stime);
+				//转换成秒数
+				var ms = stime[0]*60 + stime[1]*1-2;
+				//console.log(ms);
+				if(message){
+					htmlLrc +="<div class='lrcLine' id='"+ms+"'>"+message+"</div>";
+				}
+			}
+			// 把解析好的歌词放入div中
+			$(".l_con_lrc").html(htmlLrc);
+			//联动音乐播放歌词
+			audioDom.addEventListener("timeupdate",function(){
+					//获取当前播放时间
+					var timer = this.currentTime;
+					//console.log(timer);
+					//解析音乐对应的时间
+					var m = parseInt(timer /60);
+					var s = parseInt(timer);
+					for(var i = 0;i<s;i++){
+						$("#"+i).addClass("lrcsel").siblings().removeClass("lrcsel");	
+					}
+					//还原播放时间
+					var st = m * 60 + s;
+					$(".l_con_lrc").scrollTop(st*2);
+			});
+
+		});
+</script>
+ </body>
+</html>
